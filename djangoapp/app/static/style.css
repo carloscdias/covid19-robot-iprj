@@ -1,0 +1,13 @@
+.header {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.content {
+    margin: 5% 10%;
+}
+
+.content > h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
