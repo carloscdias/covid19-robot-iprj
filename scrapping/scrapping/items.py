@@ -6,12 +6,12 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 from scrapy_djangoitem import DjangoItem
-from app.models import WebPost
+from app.models import Novidade
 
 
 class WebPostItem(DjangoItem):
     """
     Define um item baseado no modelo BlogPost
     """
-    django_model = WebPost
+    django_model = Novidade
     

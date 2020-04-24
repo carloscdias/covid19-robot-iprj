@@ -8,7 +8,7 @@ django-migrate:
 	cd djangoapp && ./manage.py migrate
 
 scrapy-run:
-	cd scrapping && scrapy crawl iprj
+	cd scrapping && scrapy crawl CovidSearchDoctorEvidence -a limit=1
 
 django-run:
 	cd djangoapp && ./manage.py runserver
