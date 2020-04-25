@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from scrapy.exceptions import DropItem
 
 # Define your item pipelines here
 #
@@ -8,5 +9,8 @@
 
 class ScrappingPipeline(object):
     def process_item(self, item, spider):
-        item.save()
-        return item
+        try:
+            item.save()
+            return item
+        except Exception as err:
+            raise DropItem(err)
