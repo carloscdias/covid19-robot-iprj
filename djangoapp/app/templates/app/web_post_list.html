@@ -1,16 +1,66 @@
 {% load static %}
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    </head>
-    <body>
-        <div class="header">
-            <h1 >Lista de Artigos</h1>
-        </div>
-        <div class="content">
-        {% for object in object_list %}    
-            <h3>{{object.titulo}}</h3>
-        {% endfor %}
-        </div>
-    </body>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    
+    <script src="{% static 'tableConfig.js' %}"></script>
+    
+</head>
+<body>
+    <table id="pesquisa">
+            <thead>
+                <tr>
+                    <th align="left">Filtro</th>
+                    <th>Pesquisar</th>
+                    <th>Tratar como regex</th>
+                    <th>Use a pesquisa inteligente</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="filter_col1" data-column="1">
+                    <td>Título</td>
+                    <td align="center"><input type="text" class="column_filter" id="col1_filter"></td>
+                    <td align="center"><input type="checkbox" class="column_filter" id="col1_regex"></td>
+                    <td align="center"><input type="checkbox" class="column_filter" id="col1_smart" checked="checked"></td>
+                </tr>
+                <tr id="filter_col3" data-column="3">
+                    <td>Idioma</td>
+                    <td align="center"><input type="text" class="column_filter" id="col3_filter"></td>
+                    <td align="center"><input type="checkbox" class="column_filter" id="col3_regex"></td>
+                    <td align="center"><input type="checkbox" class="column_filter" id="col3_smart" checked="checked"></td>
+                </tr>
+                <tr id="filter_col6" data-column="6">
+                    <td>Data do Acesso</td>
+                    <td align="center"><input type="text" class="column_filter" id="col6_filter"></td>
+                    <td align="center"><input type="checkbox" class="column_filter" id="col6_regex"></td>
+                    <td align="center"><input type="checkbox" class="column_filter" id="col6_smart" checked="checked"></td>
+                </tr>
+                <tr id="filter_col7" data-column="7">
+                    <td>Data da Publicação</td>
+                    <td align="center"><input type="text" class="column_filter" id="col7_filter"></td>
+                    <td align="center"><input type="checkbox" class="column_filter" id="col7_regex"></td>
+                    <td align="center"><input type="checkbox" class="column_filter" id="col7_smart" checked="checked"></td>
+                </tr>
+            </tbody>
+        </table>
+    <table id="example" class="display">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Título</th>
+            <th>Idioma</th>
+            <th>Autores</th>
+            <th>Categoria</th>
+            <th>Jornal</th>
+            <th>Data do Acesso</th>
+            <th>Data da Publicação</th>
+            <th>Fonte</th>
+            <th>Link Externo</th>
+        </tr>
+    </thead>
+</table>
+</body>
 </html>

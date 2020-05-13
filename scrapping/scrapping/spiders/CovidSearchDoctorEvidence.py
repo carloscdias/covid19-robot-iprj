@@ -1,7 +1,7 @@
 import scrapy
 import json
 from csv import DictReader
-from app.models import Novidade
+from app.models import Novidade, PortalBusca, Credibilidade 
 from scrapping.items import WebPostItem
 from langdetect import detect
 
@@ -36,15 +36,27 @@ class CovidSearchDoctorEvidenceSpider(scrapy.Spider):
             )
 
     def parse_file(self, response):
-        items = WebPostItem()
         for item in DictReader(response.text.splitlines()):
+            items = WebPostItem()
             dic = dict(item)
 
-            items['titulo'] = dic['Title']
+            titulo = dic['Title']
+            if titulo != '':
+                items['titulo'] = titulo
+            else:
+                continue
+
+            idioma = detect(dic['Title'])
+            if idioma == 'en' or idioma == 'es' or idioma == 'pt':
+                items['idioma'] = idioma
+            else:
+                continue     
+
             items['resumo'] = dic['Abstract']
-            items['idioma'] = detect(dic['Title'])
             items['fonte'] = dic['DocSearch url']
             items['autores'] = dic['All Authors']
-            
-
+            items['link_externo'] = dic['Url']
+            items['categoria'] = dic['Category']
+            items['data_publicacao'] = dic['Published date']
+           
             yield items

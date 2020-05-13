@@ -8,14 +8,35 @@ class PortalBusca(models.Model):
 
 class Novidade(models.Model):
   	dataPrimeiroAcesso = models.DateField(auto_now_add=True)
-  	idioma = models.TextField(blank=True)
-  	resumo = models.TextField()
-  	autores = models.TextField()
-  	fonte = models.URLField(unique=True)
-  	titulo = models.TextField()
+  	idioma = models.TextField()
+  	resumo = models.TextField(blank=True)
+  	autores = models.TextField(blank=True)
+  	fonte = models.URLField()
+  	link_externo = models.URLField(blank=True)
+  	jornal = models.TextField(blank=True)
+  	titulo = models.TextField(unique=True)
+  	categoria = models.TextField(blank=True)
+  	data_publicacao = models.TextField(blank=True)
   	portalBusca = models.ForeignKey("PortalBusca", on_delete=models.CASCADE, null=True)
   	credibilidade = models.ForeignKey("Credibilidade", on_delete=models.CASCADE, null=True)
   	especialista = models.ForeignKey("Especialista", on_delete=models.CASCADE, null=True)
+
+
+  	def to_dict_json(self):
+  		return{
+  			'titulo': self.titulo,
+  			'fonte': self.fonte,
+  			'autores': self.autores,
+  			'resumo': self.resumo,
+  			'idioma': self.idioma,
+  			'dataPrimeiroAcesso': self.dataPrimeiroAcesso,
+        'categoria': self.categoria,
+        'data_publicacao': self.data_publicacao,
+        'jornal': self.jornal,
+        'link_externo': self.link_externo
+  		}
+
+
 
 class Especialista(models.Model):
 	nome = models.TextField()
@@ -41,3 +62,4 @@ class Credibilidade(models.Model):
 
 class Pesquisador(models.Model):
 	nome = models.TextField()
+
