@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from scrapy.exceptions import DropItem
 
 # Define your item pipelines here
 #
