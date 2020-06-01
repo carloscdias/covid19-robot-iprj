@@ -8,10 +8,10 @@ from app.views import NovidadeViewSet, WebPostList
 app_name = 'app'
 
 router = DefaultRouter()
-router.register(r'novidade/', NovidadeViewSet)
+router.register(r'novidade', NovidadeViewSet)
 
 urlpatterns = [
-    url(r'', WebPostList),
+    url(r'^$', WebPostList),
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls))
 ]
