@@ -18,7 +18,12 @@ function filterColumn ( i ) {
 
 $(document).ready(function() {
     var table = $('#example').DataTable({
-        "ajax": "/novidade/json/",
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/api/novidade/",
+            "type": "GET"
+        },
         "columns": [{
                 "className": 'details-control',
                 "orderable": false,
